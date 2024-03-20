@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class QuickSort {
-    public void sort(ArrayList<Integer> dataList) {
+    public ArrayList<Integer> sort(ArrayList<Integer> dataList) {
         if (dataList.size() <= 1) {
-            return;
+            return dataList;
         }
 
         int pivot = dataList.get(0);
@@ -21,9 +21,11 @@ public class QuickSort {
         }
 
         ArrayList<Integer> mergedArr = new ArrayList<Integer>();
-        mergedArr.addAll(leftArr);
+        mergedArr.addAll(sort(leftArr));
         mergedArr.addAll(Arrays.asList(pivot));
-        mergedArr.addAll(rightArr);
+        mergedArr.addAll(sort(rightArr));
+
+        return mergedArr;
     }
 
     public static void main(String[] args) {
@@ -34,6 +36,6 @@ public class QuickSort {
         }
         
         QuickSort qSort = new QuickSort();
-        qSort.sort(testData);
+        System.out.println(qSort.sort(testData));
     }
 }
